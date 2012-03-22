@@ -7,3 +7,4 @@ D:\Projects\C#\MandelbrotSet\MandelbrotSet\MandelbrotSet\obj\x86\Debug\GenerateR
 D:\Projects\C#\MandelbrotSet\MandelbrotSet\MandelbrotSet\obj\x86\Debug\MandelbrotSet.exe
 D:\Projects\C#\MandelbrotSet\MandelbrotSet\MandelbrotSet\obj\x86\Debug\MandelbrotSet.pdb
 D:\Projects\C#\MandelbrotSet\MandelbrotSet\MandelbrotSet\obj\x86\Debug\MandelbrotSet.Main.resources
+D:\Projects\C#\MandelbrotSet\MandelbrotSet\MandelbrotSet\obj\x86\Debug\MandelbrotSet.SettingsWindow.resources

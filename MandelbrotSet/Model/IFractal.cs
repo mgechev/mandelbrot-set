@@ -4,6 +4,6 @@ namespace MandelbrotSet
 {
     public interface IFractal
     {
-        void Draw(Bitmap area);
+        void Draw(Bitmap image, double scale, double left, double top, int iterations);
     }
 }
