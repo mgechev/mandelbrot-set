@@ -5,9 +5,9 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace MandelbrotSet
+namespace MandelbrotSet.View
 {
-    class MandelbrotFractal : IFractal
+    public class MandelbrotViewFractal : MandelbrotFractal, IViewFractal
     {
         private Color[] colors = new Color[]{Color.FromArgb(0, 0, 0),Color.FromArgb(1, 5, 0),Color.FromArgb(2, 12, 0),
                                 Color.FromArgb(3, 22, 0),Color.FromArgb(4, 32, 0),Color.FromArgb(5, 42, 0),Color.FromArgb(6, 52, 0),
@@ -15,9 +15,9 @@ namespace MandelbrotSet
                                 Color.FromArgb(7, 102, 0),Color.FromArgb(7, 112, 0),Color.FromArgb(7, 122, 0),Color.FromArgb(7, 132, 0),
                                 Color.FromArgb(7, 142, 0),Color.FromArgb(7, 152, 0),Color.FromArgb(7, 162, 0),Color.FromArgb(7, 172, 0),
                                 Color.FromArgb(7, 182, 0),Color.FromArgb(7, 192, 0),Color.FromArgb(7, 202, 0),Color.FromArgb(7, 212, 0),
-                                Color.FromArgb(7, 222, 0),Color.FromArgb(7, 232, 0),Color.FromArgb(7, 242, 0)};
+                                Color.FromArgb(7, 222, 0),Color.FromArgb(7, 232, 0),Color.FromArgb(7, 250, 0)};
 
-        public void Draw(Bitmap image, double scale, double left, double top, int iterations)
+        public void Render(Bitmap image, double scale, double left, double top)
         {
             Size size = new Size(image.Width, image.Height);
             Color color;
@@ -25,6 +25,7 @@ namespace MandelbrotSet
             int stride = data.Stride;
             int midHeight = size.Height / 2;
             int midWidth = size.Width / 2;
+            int currentInterations;
             unsafe
             {
                 byte* ptr = (byte*)data.Scan0;
@@ -32,7 +33,8 @@ namespace MandelbrotSet
                 {
                     for (double j = 0; j < size.Height; j += 1)
                     {
-                        color = this.HandlePixel(i - top, j - left, size, scale, iterations);
+                        currentInterations = this.GetIterations(i - top, j - left, size, scale);
+                        color = this.GetColor(currentInterations, this.Iterations);
                         ptr[(int)((j * 3) + i * stride)] = color.B;
                         ptr[(int)((j * 3) + i * stride) + 1] = color.G;
                         ptr[(int)((j * 3) + i * stride) + 2] = color.R;
@@ -42,24 +44,10 @@ namespace MandelbrotSet
             image.UnlockBits(data);
         }
 
-        private Color HandlePixel(double x, double y, Size size, double scale, int iterations)
+        private Color GetColor(int iterations, int maxIterations)
         {
             Color color;
-            double x0 = (-x / size.Width) * scale;
-            double y0 = (-y / size.Height) * scale;
-            x = 0;
-            y = 0;
-            var i = 0;
-            double tempX = 0;
-            while (x * x + y * y < 4 && i < iterations)
-            {
-                tempX = x * x - y * y + x0;
-                y = 2 * x * y + y0;
-
-                x = tempX;
-                i += 1;
-            }
-            if (i != 120)
+            if (iterations != 120)
             {
                 var k = 1;
                 if (k == 1)
@@ -67,20 +55,15 @@ namespace MandelbrotSet
                     while (k-- > 0) ;
                 }
             }
-            if (i == iterations)
+            if (iterations == maxIterations)
             {
                 color = this.colors[0];
             }
             else
             {
-                color = GetColor(i);
+                color = this.colors[iterations % this.colors.Length];
             }
             return color;
-        }
-
-        private Color GetColor(int iterations)
-        {
-            return this.colors[iterations % this.colors.Length];
         }
     }
 }

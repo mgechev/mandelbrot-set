@@ -6,19 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MandelbrotSet.Interfaces;
+using MandelbrotSet.MainController;
 
 namespace MandelbrotSet
 {
-    public partial class Main : Form
+    public partial class Main : Form, IMainView
     {
         private Bitmap image;
-        private IFractal fractal;
-        private double scale = 0.1;
-        private double left = 0;
-        private double top = 0;
-        private double zoomStep = 0.1;
-        private double translationStep = 10;
-        private int iterations;
+        private MainController.MainController controller;
         
         public Bitmap Image
         {
@@ -28,110 +24,124 @@ namespace MandelbrotSet
             }
         }
 
-        public IFractal Fractal
-        {
-            get
-            {
-                return fractal;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    fractal = value;
-                }
-            }
-        }
-
         public Main()
-        {
+        {            
             InitializeComponent();
             this.renderButton.Select();
-            this.InitializeSettings();
-            this.RenderImage();
-            this.fractal = new Mandelbrot();
-            this.Render();
+            controller = new MainController.MainController(this);
         }
 
-        private void InitializeSettings()
+        private void RenderButtonClick(object sender, EventArgs e)
         {
-            var point = new Point(FractalCanvas.Width / 2, FractalCanvas.Height / 2);
-            this.left = point.X;
-            this.top = point.Y - point.Y / 2;
-            this.scale = 3;
-            this.iterations = this.iterationsInput.Value;
+            if (RenderButtonClicked != null)
+            {
+                RenderButtonClicked(sender, e);
+            }
         }
 
-        private void renderButtonClick(object sender, EventArgs e)
+        private void ClearButtonClick(object sender, EventArgs e)
         {
-            this.Render();
+            if (ClearButtonClicked != null)
+            {
+                ClearButtonClicked(sender, e);
+            }
         }
 
-        private void clearButtonClick(object sender, EventArgs e)
+        private void CloseButtonClick(object sender, EventArgs e)
         {
-            this.RenderImage();
+            if (CloseButtonClicked != null)
+            {
+                CloseButtonClicked(sender, e);
+            }
         }
 
-        private void Render()
+        private void TopButtonClick(object sender, EventArgs e)
         {
-            fractal.Draw(this.image, this.scale, this.left, this.top, this.iterations);
-            FractalCanvas.Image = this.image;
+            if (TopButtonClicked != null)
+            {
+                TopButtonClicked(sender, e);
+            }
         }
 
-        private void RenderImage()
+        private void BottomButtonClick(object sender, EventArgs e)
+        {
+            if (BottomButtonClicked != null)
+            {
+                BottomButtonClicked(sender, e);
+            }
+        }
+
+        private void LeftButtonClick(object sender, EventArgs e)
+        {
+            if (LeftButtonClicked != null)
+            {
+                LeftButtonClicked(sender, e);
+            }
+        }
+
+        private void RightButtonClick(object sender, EventArgs e)
+        {
+            if (RightButtonClicked != null)
+            {
+                RightButtonClicked(sender, e);
+            }
+        }
+
+        private void ZoomInButtonClick(object sender, EventArgs e)
+        {
+            if (ZoomInButtonClicked != null)
+            {
+                ZoomInButtonClicked(sender, e);
+            }
+        }
+
+        private void ZoomOutButtonClick(object sender, EventArgs e)
+        {
+            if (ZoomOutButtonClicked != null)
+            {
+                ZoomOutButtonClicked(sender, e);
+            }
+        }
+
+        private void IterationsInputValueChanged(object sender, EventArgs e)
+        {            
+            if (IterationsValueChanged != null)
+            {
+                IterationsValueChanged(sender, e);
+            }
+        }
+
+        public event EventHandler RenderButtonClicked;
+        public event EventHandler ClearButtonClicked;
+        public event EventHandler CloseButtonClicked;
+        public event EventHandler TopButtonClicked;
+        public event EventHandler BottomButtonClicked;
+        public event EventHandler LeftButtonClicked;
+        public event EventHandler RightButtonClicked;
+        public event EventHandler ZoomInButtonClicked;
+        public event EventHandler ZoomOutButtonClicked;
+        public event EventHandler IterationsValueChanged;
+
+        public void ClearCanvas()
         {
             Size size = new Size(FractalCanvas.Width, FractalCanvas.Height);
-            image = new Bitmap(size.Width, size.Height);
+            this.image = new Bitmap(size.Width, size.Height);
             FractalCanvas.Image = image;
-            this.InitializeSettings();
         }
 
-        private void closeButtonClick(object sender, EventArgs e)
+        public void Refresh()
         {
-            Environment.Exit(0);
+            FractalCanvas.Image = image;
         }
 
-        private void topButtonClick(object sender, EventArgs e)
+        public Bitmap Canvas
         {
-            this.top += this.translationStep;
-            this.Render();
+            get { return this.image; }
         }
 
-        private void bottomButtonClick(object sender, EventArgs e)
+        public int Iterations
         {
-            this.top -= this.translationStep;
-            this.Render();
+            get { return this.iterationsInput.Value; }
         }
-
-        private void leftButtonClick(object sender, EventArgs e)
-        {
-            this.left += this.translationStep;
-            this.Render();
-        }
-
-        private void rightButtonClick(object sender, EventArgs e)
-        {
-            this.left -= this.translationStep;
-            this.Render();
-        }
-
-        private void zoomInButtonClick(object sender, EventArgs e)
-        {
-            this.scale -= this.zoomStep;
-            this.Render();
-        }
-
-        private void zoomOutButtonClick(object sender, EventArgs e)
-        {
-            this.scale += this.zoomStep;
-            this.Render();
-        }
-
-        private void iterationsInputValueChanged(object sender, EventArgs e)
-        {
-            this.iterations = this.iterationsInput.Value;
-            this.Render();
-        }
-
     }
 }

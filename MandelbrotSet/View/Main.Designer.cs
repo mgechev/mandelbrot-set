@@ -67,7 +67,7 @@
             this.renderButton.TabIndex = 0;
             this.renderButton.Text = "Render";
             this.renderButton.UseVisualStyleBackColor = true;
-            this.renderButton.Click += new System.EventHandler(this.renderButtonClick);
+            this.renderButton.Click += new System.EventHandler(this.RenderButtonClick);
             // 
             // clearButton
             // 
@@ -77,7 +77,7 @@
             this.clearButton.TabIndex = 1;
             this.clearButton.Text = "Clear";
             this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.clearButtonClick);
+            this.clearButton.Click += new System.EventHandler(this.ClearButtonClick);
             // 
             // closeButton
             // 
@@ -87,7 +87,7 @@
             this.closeButton.TabIndex = 2;
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.closeButtonClick);
+            this.closeButton.Click += new System.EventHandler(this.CloseButtonClick);
             // 
             // interactionPanel
             // 
@@ -124,7 +124,7 @@
             this.iterationsInput.TabIndex = 9;
             this.iterationsInput.TickFrequency = 128;
             this.iterationsInput.Value = 256;
-            this.iterationsInput.ValueChanged += new System.EventHandler(this.iterationsInputValueChanged);
+            this.iterationsInput.ValueChanged += new System.EventHandler(this.IterationsInputValueChanged);
             // 
             // zoomOutButton
             // 
@@ -135,7 +135,7 @@
             this.zoomOutButton.Size = new System.Drawing.Size(25, 25);
             this.zoomOutButton.TabIndex = 8;
             this.zoomOutButton.UseVisualStyleBackColor = true;
-            this.zoomOutButton.Click += new System.EventHandler(this.zoomOutButtonClick);
+            this.zoomOutButton.Click += new System.EventHandler(this.ZoomOutButtonClick);
             // 
             // zoomInButton
             // 
@@ -146,7 +146,7 @@
             this.zoomInButton.Size = new System.Drawing.Size(25, 25);
             this.zoomInButton.TabIndex = 7;
             this.zoomInButton.UseVisualStyleBackColor = true;
-            this.zoomInButton.Click += new System.EventHandler(this.zoomInButtonClick);
+            this.zoomInButton.Click += new System.EventHandler(this.ZoomInButtonClick);
             // 
             // topButton
             // 
@@ -157,7 +157,7 @@
             this.topButton.Size = new System.Drawing.Size(25, 25);
             this.topButton.TabIndex = 3;
             this.topButton.UseVisualStyleBackColor = true;
-            this.topButton.Click += new System.EventHandler(this.topButtonClick);
+            this.topButton.Click += new System.EventHandler(this.TopButtonClick);
             // 
             // rightButton
             // 
@@ -168,7 +168,7 @@
             this.rightButton.Size = new System.Drawing.Size(25, 25);
             this.rightButton.TabIndex = 5;
             this.rightButton.UseVisualStyleBackColor = true;
-            this.rightButton.Click += new System.EventHandler(this.rightButtonClick);
+            this.rightButton.Click += new System.EventHandler(this.RightButtonClick);
             // 
             // bottomButton
             // 
@@ -179,7 +179,7 @@
             this.bottomButton.Size = new System.Drawing.Size(25, 25);
             this.bottomButton.TabIndex = 6;
             this.bottomButton.UseVisualStyleBackColor = true;
-            this.bottomButton.Click += new System.EventHandler(this.bottomButtonClick);
+            this.bottomButton.Click += new System.EventHandler(this.BottomButtonClick);
             // 
             // leftButton
             // 
@@ -191,7 +191,7 @@
             this.leftButton.TabIndex = 4;
             this.leftButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.leftButton.UseVisualStyleBackColor = true;
-            this.leftButton.Click += new System.EventHandler(this.leftButtonClick);
+            this.leftButton.Click += new System.EventHandler(this.LeftButtonClick);
             // 
             // panel1
             // 

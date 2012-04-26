@@ -47,25 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SettingsWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SettingsWindow.Designer.cs">
-      <DependentUpon>SettingsWindow.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Controller\MainController.cs" />
+    <Compile Include="Interfaces\IMainView.cs" />
+    <Compile Include="Model\MandelbrotFractal.cs" />
     <Compile Include="View\Main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\IFractal.cs" />
-    <Compile Include="Model\Mandelbrot.cs" />
+    <Compile Include="Interfaces\IFractal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="SettingsWindow.resx">
-      <DependentUpon>SettingsWindow.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="View\MandelbrotViewFractal.cs" />
+    <Compile Include="Interfaces\IViewFractal.cs" />
     <EmbeddedResource Include="View\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
